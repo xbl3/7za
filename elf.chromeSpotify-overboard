@@ -1,0 +1,36 @@
+@echo off
+
+set zip.chromeElf=%1
+ if not defined zip.chromeElf (
+  rem search currentDir / download latest / prompt for path
+  call:startOverboard
+  )
+  goto:eof
+  
+  
+  :startOverboard
+  call:searchCurrentDir
+  goto:eof
+  rem TBC
+  
+ :searchCurrentDir
+for /f "useback delims=" %%i in (`dir /b "%cd%\*chrome*"`) do (
+ for %%a in ("%%~i") do (
+	if /i "%%~xa" == ".zip" (
+			call:7zList "%%~dpnxa"
+			)
+		)
+	)
+)
+
+
+goto:eof
+:7zList
+setlocal enabledelayedexpansion
+for %%i in ("%~1") do (
+for /f "useback delims=" %%a in (`7za l "%%~i"`) do (echo:%%a | find /i "chrome_elf.dll") 
+	)
+endlocal
+goto:eof
+  
+ )
