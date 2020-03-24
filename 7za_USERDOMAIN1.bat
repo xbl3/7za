@@ -1,0 +1,1 @@
+@C:\bin\7za.exe a "D:/zippedUp/%~nx1_%USERDOMAIN%.zip" -tzip "%~1"
